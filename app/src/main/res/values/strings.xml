@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">MyPark</string>
+    <string name="title_activity_tela_maps" translatable="false">Map</string>
+    <string name="title_activity_maps" translatable="false">Map</string>
+    <string name="title_activity_detalhes" translatable="false">DetalhesActivity</string>
+
+
+    <string name="google_maps_key">AIzaSyDxXplNAyygp9AhJxS-LW6LrRcpf2ujrIg</string>
+</resources>

@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LoginActivity">
+
+
+    <View
+        android:id="@+id/view4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#757575"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <LinearLayout
+        android:layout_width="396dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center|top"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/view4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/view4">
+
+        <ScrollView
+            android:id="@+id/scrollView2"
+            android:layout_width="400dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:fillViewport="true"
+            app:layout_constraintBottom_toBottomOf="@+id/view4"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="47dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_gravity="center_horizontal"
+                    android:fontFamily="@font/lora_bolditalic"
+                    android:text="Escolha as opçoes abaixo"
+                    android:textColor="#FFFFFF"
+                    android:textSize="23dp" />
+
+                <CheckBox
+                    android:id="@+id/checkBike"
+                    android:layout_width="wrap_content"
+                    android:layout_height="95dp"
+                    android:layout_marginLeft="24dp"
+                    android:layout_marginRight="30dp"
+                    android:background="@drawable/biking_background"
+                    android:fontFamily="@font/lora_bolditalic"
+                    android:text="Pista de Bike"
+                    android:textColor="#FFFFFF"
+                    android:textAlignment="viewStart"
+                    android:textSize="24sp" />
+
+                <CheckBox
+                    android:id="@+id/checkCorrida"
+                    android:layout_width="wrap_content"
+                    android:layout_height="95dp"
+                    android:layout_marginTop="7dp"
+                    android:layout_marginLeft="24dp"
+                    android:layout_marginRight="30dp"
+                    android:background="@drawable/coastal_walkway"
+                    android:fontFamily="@font/lora_bolditalic"
+                    android:text="Pista de corrida"
+                    android:textColor="#FFFFFF"
+                    android:textAlignment="viewStart"
+                    android:textSize="24sp" />
+
+
+                <CheckBox
+                    android:id="@+id/checkDog"
+                    android:layout_width="wrap_content"
+                    android:layout_height="95dp"
+                    android:layout_marginTop="7dp"
+                    android:layout_marginLeft="24dp"
+                    android:layout_marginRight="30dp"
+                    android:background="@drawable/dog_area"
+                    android:fontFamily="@font/lora_bolditalic"
+                    android:textAlignment="viewStart"
+                    android:text="Área para dogs"
+                    android:textColor="#FFFFFF"
+                    android:textSize="24sp" />
+
+                <CheckBox
+                    android:id="@+id/checkSkate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="95dp"
+                    android:layout_marginTop="7dp"
+                    android:layout_marginLeft="24dp"
+                    android:layout_marginRight="30dp"
+                    android:background="@drawable/skate_park"
+                    android:fontFamily="@font/lora_bolditalic"
+                    android:text="Pista de Skate"
+                    android:textColor="#FFFFFF"
+                    android:textAlignment="viewStart"
+                    android:textSize="24sp" />
+
+                <CheckBox
+                    android:id="@+id/checkAreaInfantil"
+                    android:layout_width="wrap_content"
+                    android:layout_height="95dp"
+                    android:layout_marginTop="7dp"
+                    android:layout_marginLeft="24dp"
+                    android:layout_marginRight="30dp"
+                    android:background="@drawable/area_crianca_detalhes"
+                    android:fontFamily="@font/lora_bolditalic"
+                    android:text="Área infantil"
+                    android:textColor="#FFFFFF"
+                    android:textAlignment="viewStart"
+                    android:textSize="24sp" />
+
+                <CheckBox
+                    android:id="@+id/checkAcademia"
+                    android:layout_width="wrap_content"
+                    android:layout_height="95dp"
+                    android:layout_marginTop="7dp"
+                    android:background="@drawable/academia"
+                    android:fontFamily="@font/lora_bolditalic"
+                    android:textColor="#FFFFFF"
+                    android:layout_marginLeft="24dp"
+                    android:layout_marginRight="30dp"
+                    android:text="Academia ao ar livre"
+                    android:textAlignment="viewStart"
+                    android:textSize="24sp" />
+
+
+            </LinearLayout>
+        </ScrollView>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="60dp"
+            android:layout_gravity="bottom"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:layout_marginBottom="10dp">
+
+            <Button
+                android:id="@+id/btnPesquisar"
+                android:layout_width="230dp"
+                android:layout_height="45dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/roundedbutton"
+                android:fontFamily="@font/lora_regular"
+                android:text="Pesquisar"
+                app:fontFamily="@font/lora_regular"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.504"
+                app:layout_constraintStart_toStartOf="parent" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+
+
+</android.support.constraint.ConstraintLayout>
+
