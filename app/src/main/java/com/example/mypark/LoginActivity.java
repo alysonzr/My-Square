@@ -1,11 +1,13 @@
 package com.example.mypark;
 
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.ImageButton;
 
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -18,12 +20,12 @@ public class LoginActivity extends AppCompatActivity {
     CheckBox checkAcademia,checkDog,checkSkate,checkAreaCrianca,checkBike,checkCorrida;
 
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
         btnPesquisar = (Button)findViewById(R.id.btnPesquisar);
@@ -34,14 +36,13 @@ public class LoginActivity extends AppCompatActivity {
         checkAcademia = (CheckBox)findViewById(R.id.checkAcademia);
         checkDog = (CheckBox)findViewById(R.id.checkDog);
         checkSkate = (CheckBox)findViewById(R.id.checkSkate);
-
         //Recebendo nome do usuario da main
         Intent i = getIntent();
         Bundle p = i.getExtras();
-        String nome = p.getString("chave_nome");
-        setTitle("Bem Vindo, " + nome);
 
-
+        setTitle("My Square");
+        getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         btnPesquisar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,8 +50,6 @@ public class LoginActivity extends AppCompatActivity {
                 String facilits = "";
                final Intent i = new Intent(LoginActivity.this, OpcoesDePraca.class);
                 if(!checkBike.isChecked() && !checkAreaCrianca.isChecked() && !checkCorrida.isChecked() && !checkAcademia.isChecked() &&  !checkDog.isChecked() && !checkSkate.isChecked() ){
-
-
                 }
 
                 if(checkSkate.isChecked()){

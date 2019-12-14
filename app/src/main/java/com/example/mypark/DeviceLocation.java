@@ -2,11 +2,11 @@ package com.example.mypark;
 
 public class DeviceLocation {
 
-	private Number latitudeDevice;
-	private Number longitudeDevide;
+	private double latitudeDevice;
+	private double longitudeDevide;
 
 
-	public DeviceLocation(Number latitudeDevice, Number longitudeDevide) {
+	public DeviceLocation(double latitudeDevice, double longitudeDevide) {
 		this.latitudeDevice = latitudeDevice;
 		this.longitudeDevide = longitudeDevide;
 	}
@@ -15,7 +15,7 @@ public class DeviceLocation {
 		return latitudeDevice;
 	}
 
-	public void setLatitudeDevice(Number latitudeDevice) {
+	public void setLatitudeDevice(double latitudeDevice) {
 		this.latitudeDevice = latitudeDevice;
 	}
 
@@ -23,7 +23,7 @@ public class DeviceLocation {
 		return longitudeDevide;
 	}
 
-	public void setLongitudeDevide(Number longitudeDevide) {
+	public void setLongitudeDevide(double longitudeDevide) {
 		this.longitudeDevide = longitudeDevide;
 	}
 }

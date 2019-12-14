@@ -3,10 +3,12 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Button;
 
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mypark.DataBase.BDHelper;
@@ -18,8 +20,9 @@ public class MainActivity extends AppCompatActivity {
 
 
     EditText txtNome, txtSenha;
-    Button btnLogar, btnRegistrar;
+    Button btnLogar;
     BDHelper bd;
+    TextView btnRegistrar;
 
         FirebaseDatabase firebaseDatabase;
         DatabaseReference databaseReference;
@@ -36,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         txtSenha = (EditText) findViewById(R.id.txtSenha);
 
         btnLogar = (Button) findViewById(R.id.btnLogar);
-        btnRegistrar = (Button) findViewById(R.id.btnRegistrar);
+        btnRegistrar = (TextView) findViewById(R.id.btnRegistrar);
        // inicializarFirebase();
 
 
@@ -80,12 +83,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    /*private void inicializarFirebase() {
-        FirebaseApp.initializeApp(MainActivity.this);
-        firebaseDatabase = FirebaseDatabase.getInstance();
-        firebaseDatabase.setPersistenceEnabled(true);
-        databaseReference = firebaseDatabase.getReference();
-    }*/
 
 }
 

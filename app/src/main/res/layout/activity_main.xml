@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_gravity="right"
     tools:context=".MainActivity">
 
 
@@ -11,11 +12,13 @@
         android:id="@+id/view"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="#A2D868"
+        android:background="@drawable/tela_login"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
         tools:visibility="visible" />
 
     <Button
@@ -34,7 +37,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtSenha" />
 
-    <Button
+   <!-- <Button
         android:id="@+id/btnRegistrar"
         android:layout_width="290dp"
         android:layout_height="53dp"
@@ -47,7 +50,7 @@
         android:text="Registrar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnLogar" />
+        app:layout_constraintTop_toBottomOf="@+id/btnLogar" />-->
 
 
     <EditText
@@ -58,14 +61,16 @@
         android:layout_marginTop="36dp"
         android:layout_marginEnd="8dp"
         android:backgroundTintMode="src_in"
-        android:drawableLeft="@drawable/iconusuario"
+        android:drawableLeft="@drawable/icon_user"
         android:ems="10"
         android:hint="Nome"
+        android:gravity="center_vertical"
+        android:background="#97FFFFFF"
         android:inputType="textPersonName"
         android:selectAllOnFocus="false"
         android:textAllCaps="true"
-        android:textColorHint="#FFFFFF"
-        android:textColorLink="#FFFFFF"
+        android:textColorHint="#000000"
+        android:textColorLink="#000000"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.473"
         app:layout_constraintStart_toStartOf="parent"
@@ -79,13 +84,15 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="28dp"
         android:layout_marginEnd="8dp"
-        android:drawableLeft="@drawable/lock"
+        android:drawableLeft="@drawable/icon_senha"
         android:ems="10"
         android:fontFamily="monospace"
         android:hint="Senha"
+        android:gravity="center_vertical"
+        android:background="#97FFFFFF"
         android:inputType="textPassword"
-        android:textColorHint="#FFFFFF"
-        android:textColorLink="#FFFFFF"
+        android:textColorHint="#000000"
+        android:textColorLink="#000000"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.473"
         app:layout_constraintStart_toStartOf="parent"
@@ -93,14 +100,43 @@
 
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="125dp"
+        android:layout_width="wrap_content"
         android:layout_height="118dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="40dp"
         android:layout_marginEnd="8dp"
+        android:background="@drawable/logo_4cm"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/nova_senha"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:text="Esqueceu a senha?"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/btnRegistrar" />
+
+    <TextView
+        android:id="@+id/btnRegistrar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="10dp"
+        android:text="Registrar nova conta."
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.923"
+        app:layout_constraintStart_toEndOf="@+id/nova_senha" />
 
 </android.support.constraint.ConstraintLayout>

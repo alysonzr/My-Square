@@ -31,10 +31,11 @@ public class PracaAdapter extends ArrayAdapter<Praca> {
         View rowView = inflater.inflate(R.layout.activity_lista_custom,parent , false );
         TextView nomePraca = ( TextView )rowView.findViewById (R.id.nome );
         TextView instalacoes = ( TextView )rowView.findViewById ( R.id.instalacoes);
+        TextView distancia = ( TextView )rowView.findViewById ( R.id.list_custom_dist);
 
-        nomePraca.setText ("Nome: "+elementos.get(position).getNome ());
+        nomePraca.setText (elementos.get(position).getNome ());
         instalacoes.setText ("Instalações: "+elementos.get (position).getFacilidades ());
-        //imagem.setImageResource ( elementos .get (position). getImagem ());
+        distancia.setText ("Distancia: "+elementos.get (position).getDistancia()+" Km");
 
         return rowView ;
     }

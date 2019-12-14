@@ -12,6 +12,7 @@ import android.os.Looper;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
@@ -22,6 +23,7 @@ import java.lang.Math;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -52,6 +54,9 @@ public class OpcoesDePraca extends AppCompatActivity {
     protected static final int TIMER_RUNTIME = 50000;
     private Double latitudeUsuario;
     private Double longitudeUsuario;
+    private Double latitudeDevice;
+    private Double longitudeDevice;
+    BottomNavigationView navView;
     private Double result;
 
     private GoogleApiClient mGoogleApiClient;
@@ -61,12 +66,38 @@ public class OpcoesDePraca extends AppCompatActivity {
     FirebaseFirestore fireStore;
 
     final ArrayList<DeviceLocation> LatLong = new ArrayList<DeviceLocation>();
-
+    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+            = new BottomNavigationView.OnNavigationItemSelectedListener() {
+        Intent i;
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            switch (item.getItemId()) {
+           /*     case R.id.voltar:
+                    i = new Intent(OpcoesDePraca.this, LoginActivity.class);
+                    i.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+                    startActivity(i);
+                    return true;*/
+                case R.id.menu:
+                    i = new Intent(OpcoesDePraca.this, LoginActivity.class);
+                    i.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+                    startActivity(i);
+                    return true;
+                case R.id.sair:
+                    Intent in = new Intent(OpcoesDePraca.this, MainActivity.class);
+                    startActivity(in);
+                    return true;
+            }
+            return false;
+        }
+    };
     int PERMISSION_ID = 44;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detalhes_pracas);
+        navView = findViewById(R.id.nav_view);
+        navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+
         setTitle("MySquare");
         fireStore = FirebaseFirestore.getInstance();
         final ListView lista = (ListView) findViewById(R.id.listPracas);
@@ -97,8 +128,17 @@ public class OpcoesDePraca extends AppCompatActivity {
                             ArrayList imagem = (ArrayList) document.get("Imagens");
                             Number latitudePraca = (Number) document.get("Latitude");
                             Number longitudePraca = (Number) document.get("Longitude");
+                            ArrayList comenarios = (ArrayList) document.get("Comentarios");
 
-                            Praca p = new Praca(uid, nome, instalacoes, endereco, imagem, latitudePraca, longitudePraca);
+                            double firstLatToRad = Math.toRadians(latitudePraca.doubleValue());
+                            double secondLatToRad = Math.toRadians(getLatitudeDevice().doubleValue());
+                            double deltaLongitudeInRad = Math.toRadians(getLongitudeDevice().doubleValue() - getLongitudeUsuario().doubleValue());
+
+
+                            DetalhesActivity detalhesActivity = new DetalhesActivity();
+                            double distandia = detalhesActivity.formatNumber(firstLatToRad,secondLatToRad,deltaLongitudeInRad);
+
+                            Praca p = new Praca(uid, nome, instalacoes, endereco, imagem, latitudePraca, longitudePraca,distandia,comenarios);
                             pracas.add(p);
                             ArrayAdapter adapter = new PracaAdapter(OpcoesDePraca.this, pracas);
                             lista.setAdapter(adapter);
@@ -121,12 +161,26 @@ public class OpcoesDePraca extends AppCompatActivity {
                             ArrayList imagem = (ArrayList) document.get("Imagens");
                             Number latitudePraca = (Number) document.get("Latitude");
                             Number longitudePraca = (Number) document.get("Longitude");
+                            ArrayList comenarios = (ArrayList) document.get("Comentarios");
 
+                            if(latitudePraca != null || longitudePraca != null || comenarios != null ) {
+                                double firstLatToRad = Math.toRadians(latitudePraca.doubleValue());
+                                double secondLatToRad = Math.toRadians(getLatitudeDevice().doubleValue());
+                                double deltaLongitudeInRad = Math.toRadians(getLongitudeDevice().doubleValue() - longitudePraca.doubleValue());
+                                DetalhesActivity detalhesActivity = new DetalhesActivity();
+                                double distandia = detalhesActivity.formatNumber(firstLatToRad, secondLatToRad, deltaLongitudeInRad);
 
-                            Praca p = new Praca(uid, nome, instalacoes, endereco, imagem, latitudePraca, longitudePraca);
-                            pracas.add(p);
-                            ArrayAdapter adapter = new PracaAdapter(OpcoesDePraca.this, pracas);
-                            lista.setAdapter(adapter);
+                                Praca p = new Praca(uid, nome, instalacoes, endereco, imagem, latitudePraca, longitudePraca,distandia, comenarios);
+                                pracas.add(p);
+                                ArrayAdapter adapter = new PracaAdapter(OpcoesDePraca.this, pracas);
+                                lista.setAdapter(adapter);
+                            }else{
+                                Praca p = new Praca(uid, nome, instalacoes, endereco, imagem, latitudePraca, longitudePraca,0, null);
+                                pracas.add(p);
+                                ArrayAdapter adapter = new PracaAdapter(OpcoesDePraca.this, pracas);
+                                lista.setAdapter(adapter);
+                            }
+
                         }
                     }
                 }
@@ -152,6 +206,7 @@ public class OpcoesDePraca extends AppCompatActivity {
                 ArrayList imagem = itemValue.getImagem();
                 Number latitude = itemValue.getLatitude();
                 Number longitude = itemValue.getLongitude();
+                ArrayList comentarios = itemValue.getComentarios();
 
                 Number latitudeDevice = item.getLatitudeDevice();
                 Number longitudeDevice = item.getLongitudeDevide();
@@ -166,6 +221,7 @@ public class OpcoesDePraca extends AppCompatActivity {
                 i.putExtra("imagem", imagem);
                 i.putExtra("latitude", latitude);
                 i.putExtra("longitude", longitude);
+                i.putExtra("comentarios", comentarios);
 
 
                 i.putExtra("latitudeDevice", latitudeDevice);
@@ -194,7 +250,9 @@ public class OpcoesDePraca extends AppCompatActivity {
                                 } else {
                                     Number latitude = location.getLatitude();
                                     Number longitude = location.getLongitude();
-                                    DeviceLocation d = new DeviceLocation(latitude,longitude);
+                                    setLatitudeDevice(latitude.doubleValue());
+                                    setLongitudeDevice(longitude.doubleValue());
+                                    DeviceLocation d = new DeviceLocation(latitude.doubleValue(),longitude.doubleValue());
                                     LatLong.add(d);
                                 }
                             }
@@ -231,7 +289,9 @@ public class OpcoesDePraca extends AppCompatActivity {
             Location  mLastLocation = locationResult.getLastLocation ();
             Number latitude = location.getLatitude();
             Number longitude = location.getLongitude();
-            DeviceLocation d = new DeviceLocation(latitude,longitude);
+            setLatitudeDevice(latitude.doubleValue());
+            setLongitudeDevice(longitude.doubleValue());
+            DeviceLocation d = new DeviceLocation(latitude.doubleValue(),longitude.doubleValue());
             LatLong.add(d);
         }
     };
@@ -279,28 +339,29 @@ public class OpcoesDePraca extends AppCompatActivity {
     }
 
 
-   /* public void ConverteLatitude(Double latitude1, Double logitude1, String latitude2, String logitude2) {
-
-        final int R = 6371; // Radious of the earth
-        Double lat1 = latitude1;
-        Double lon1 = logitude1;
-        Double lat2 = Double.parseDouble(latitude2);
-        Double lon2 = Double.parseDouble(logitude2);
-        Double latDistance = toRad(lat2 - lat1);
-        Double lonDistance = toRad(lon2 - lon1);
-        Double a = Math.sin(latDistance / 2) * Math.sin(latDistance / 2) +
-                Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) *
-                        Math.sin(lonDistance / 2) * Math.sin(lonDistance / 2);
-        Double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-        Double distance = R * c;
-        result = distance;
-        Log.i("LOG", "distancia: " + distance);
+    public Location getLocation() {
+        return location;
     }
 
-    private static Double toRad(Double value) {
-        return value * Math.PI / 180;
-    }*/
+    public void setLocation(Location location) {
+        this.location = location;
+    }
 
+    public Double getLatitudeDevice() {
+        return latitudeDevice;
+    }
+
+    public void setLatitudeDevice(Double latitudeDevice) {
+        this.latitudeDevice = latitudeDevice;
+    }
+
+    public Double getLongitudeDevice() {
+        return longitudeDevice;
+    }
+
+    public void setLongitudeDevice(Double longitudeDevice) {
+        this.longitudeDevice = longitudeDevice;
+    }
 
     public Double getLatitudeUsuario() {
         return latitudeUsuario;

@@ -41,15 +41,18 @@ public class PracaDetalhesAdapter extends ArrayAdapter<String> {
 
 
         Instalacoes.setText(elementos.get(position));
-        if(elementos.get(position).equalsIgnoreCase("Área para Criança")){
-            imageView.setImageResource(R.drawable.area_crianca_icon );
-        }if(elementos.get(position).equalsIgnoreCase(" Pista de Corrida")){
-            imageView.setImageResource(R.drawable.areadog_icon);
-        }if(elementos.get(position).equalsIgnoreCase(" Pista de Ciclismo")){
+        if(elementos.get(position).equalsIgnoreCase(" Pista de Ciclismo")) {
             imageView.setImageResource(R.drawable.pista_ciclismo_icon);
-        }if(elementos.get(position).equalsIgnoreCase(" Academia")){
+        }if(elementos.get(position).equalsIgnoreCase(" Pista de Corrida")){
+            imageView.setImageResource(R.drawable.corrida_caminhada);
+        }if(elementos.get(position).equalsIgnoreCase(" Area para Dog")){
+            imageView.setImageResource(R.drawable.icon_dog);
+        }if(elementos.get(position).equalsIgnoreCase(" Pista de Skate")){
+            imageView.setImageResource(R.drawable.icon_skate);
+        }if(elementos.get(position).equalsIgnoreCase("Área para Criança")){
+            imageView.setImageResource(R.drawable.area_crianca_icon );
+        }if(elementos.get(position).equalsIgnoreCase(" Academia")) {
             imageView.setImageResource(R.drawable.academia_icon);
-
         }
 
         return rowView;
